@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-M">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Aniversários PWA</title>
     
@@ -72,8 +72,8 @@
         <header>
             <h1><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" viewBox="0 0 16 16" style="vertical-align: -4px; margin-right: 8px;">
                 <path d="M4.5 1A.5.5 0 0 1 5 1.5v.664a.5.5 0 0 1-.092.287l-1.87 2.137A.5.5 0 0 1 2.5 4.5v.393c0 .326.164.624.432.793l1.813 1.106A.5.5 0 0 1 5 7.188V13.5a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1.278l-.068-.028-1.918 1.37A.5.5 0 0 1 .5 13V.5a.5.5 0 0 1 .5-.5h3.5zm10 0a.5.5 0 0 1 .5.5v12.5a.5.5 0 0 1-.5.5h-3.5a.5.5 0 0 1-.408-.213l-1.918-1.37-.068.028V13.5a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5V7.188a.5.5 0 0 1 .255-.438l1.813-1.106c.268-.17.432-.467.432-.793v-.393a.5.5 0 0 1-.541-.499l-1.87-2.137A.5.5 0 0 1 11 1.5V1.5a.5.5 0 0 1 .5-.5h3.5z"/>
-              </svg>Lista de Aniversários</h1>
-            <p>Adicione, edite e veja os aniversários. Funciona offline!</p>
+              </svg>Lista de Aniversários 🎉</h1>
+            <p>Adicione, edite e veja os aniversários.</p>
         </header>
 
         <!-- Formulário -->
@@ -164,7 +164,7 @@
                         resolve(event.target.result);
                     };
                     request.onerror = (event) => {
-                        console.error('Erro ao salvar item:', event.target.error);
+                        console.error('❌ Erro ao salvar item:', event.target.error);
                         reject(event.target.error);
                     };
                 });
@@ -178,7 +178,7 @@
                         resolve(event.target.result);
                     };
                     request.onerror = (event) => {
-                        console.error('Erro ao buscar todos os itens:', event.target.error);
+                        console.error('❌ Erro ao buscar todos os itens:', event.target.error);
                         reject(event.target.error);
                     };
                 });
@@ -192,7 +192,7 @@
                         resolve();
                     };
                     request.onerror = (event) => {
-                        console.error('Erro ao deletar item:', event.target.error);
+                        console.error('❌Erro ao deletar item:', event.target.error);
                         reject(event.target.error);
                     };
                 });
@@ -201,7 +201,7 @@
 
         /**
          * Classe AppUI
-         * Encapsula toda a lógica de interação com o DOM (a interface).
+         * Encapsula toda a lógica de interação com o DOM.
          */
         class AppUI {
             constructor(db) {
@@ -224,7 +224,7 @@
                     this.loadBirthdayList();
                 } catch (error) {
                     console.error("Falha ao inicializar o AppUI:", error);
-                    this.loadingState.innerHTML = "<p>Erro ao carregar o banco de dados.</p>";
+                    this.loadingState.innerHTML = "<p> ❌Erro ao carregar o banco de dados.</p>";
                 }
             }
 
@@ -282,8 +282,8 @@
                             <small>${this.formatDate(item.data)}</small>
                         </div>
                         <div class="actions">
-                            <button class="btn-edit secondary" data-id="${item.id}">Editar</button>
-                            <button class="btn-delete contrast" data-id="${item.id}">Excluir </button>
+                            <button class="btn-edit secondary" data-id="${item.id}">Editar 🖊</button>
+                            <button class="btn-delete contrast" data-id="${item.id}">Excluir 🗑️ </button>
                         </div>
                     `;
                     this.listContainer.appendChild(article);
@@ -307,7 +307,7 @@
                     this.clearForm();
                     this.loadBirthdayList();
                 } catch (error) {
-                    console.error("Erro ao salvar:", error);
+                    console.error("❌ Erro ao salvar:", error);
                     this.showMessage(' Erro ao salvar. Tente novamente.', 'error');
                 }
             }
@@ -323,7 +323,7 @@
                         this.fieldName.focus();
                     }
                 } catch (error) {
-                    console.error("Erro ao carregar para edição:", error);
+                    console.error("❌ Erro ao carregar para edição:", error);
                 }
             }
 
@@ -334,8 +334,8 @@
                     this.loadBirthdayList();
                     this.clearForm();
                 } catch (error) {
-                    console.error("Erro ao deletar:", error);
-                    this.showMessage('Erro ao excluir.', 'error');
+                    console.error("❌ Erro ao deletar:", error);
+                    this.showMessage('❌ Erro ao excluir.', 'error');
                 }
             }
 
