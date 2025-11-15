@@ -1,15 +1,13 @@
 /*
  * Service Worker para Caching Offline
  */
-
-// v2 - Incrementamos a versão para forçar a atualização
 const CACHE_NAME = 'birthday-cache-v2';
 
 // Arquivos para fazer cache.
-// Usamos caminhos relativos.
+// caminhos relativos.
 const PRECACHE_ASSETS = [
     './', // O index.html
-    './manifest.json', // O novo arquivo de manifesto
+    './manifest.json', // arquivo de manifesto
     'https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css'
 ];
 
