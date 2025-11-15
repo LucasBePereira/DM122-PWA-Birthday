@@ -155,7 +155,7 @@
         "name": "Lista de Aniversários PWA",
         "short_name": "Aniversários",
         "description": "Um PWA simples para listar aniversários, com suporte offline.",
-        "start_url": "./",
+        "start_url": "/DM122-PWA-Birthday/",
         "display": "standalone",
         "background_color": "#ffffff",
         "theme_color": "#546e7a",
@@ -193,7 +193,7 @@
         // Arquivos para fazer cache.
         // Incluímos a própria página ('.') e o CSS do Pico.
         const PRECACHE_ASSETS = [
-            './', // A própria index.html
+            '/DM122-PWA-Birthday/', // A própria index.html
             'https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css'
         ];
 
@@ -649,7 +649,7 @@
                     const swUrl = URL.createObjectURL(swBlob);
                     
                     window.addEventListener('load', () => {
-                        navigator.serviceWorker.register(swUrl, { scope: './' })
+                        navigator.serviceWorker.register(swUrl, { scope: '/DM122-PWA-Birthday/' })
                             .then(registration => {
                                 console.log('Service Worker registrado com sucesso! Escopo:', registration.scope);
                             })
