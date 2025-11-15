@@ -8,68 +8,48 @@
     <!-- Meta tags do PWA -->
     <meta name="theme-color" content="#546e7a"/>
     <meta name="description" content="Um PWA simples para listar aniversários, com suporte offline.">
+
+    <!-- Link para o Manifesto (AGORA UM ARQUIVO SEPARADO) -->
+    <link rel="manifest" href="manifest.json">
     
     <!-- Pico.css CDN -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css" />
 
     <style>
-        /* Ajustes e Estilos Personalizados */
+        /* ... (Todo o seu CSS continua aqui, sem mudanças) ... */
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            padding-bottom: 0px; /* Garante que o conteúdo não seja cortado */
+            padding-bottom: 0px; 
         }
-
-        /* Tema claro forçado para consistência */
         [data-theme="light"] {
-            --primary: #546e7a; /* Azul acinzentado */
+            --primary: #546e7a;
             --primary-hover: #455a64;
             --primary-focus: rgba(84, 110, 122, 0.25);
             --primary-inverse: #FFF;
         }
-
-        h1, h2 {
-            color: var(--primary);
-        }
-
-        /* Estilo para os itens da lista */
+        h1, h2 { color: var(--primary); }
         #birthday-list article {
             margin-bottom: 1rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap; /* Para telas pequenas */
+            flex-wrap: wrap;
         }
-
-        #birthday-list .info {
-            flex-grow: 1;
-        }
-        
-        #birthday-list .info strong {
-            font-size: 1.1rem;
-            color: var(--primary);
-        }
-        
-        #birthday-list .actions {
-            display: flex;
-            gap: 0.5rem;
-            margin-top: 0.5rem; /* Quebra de linha em telas pequenas */
-        }
-
-        /* Botões de ação com cores */
+        #birthday-list .info { flex-grow: 1; }
+        #birthday-list .info strong { font-size: 1.1rem; color: var(--primary); }
+        #birthday-list .actions { display: flex; gap: 0.5rem; margin-top: 0.5rem; }
         .btn-edit {
-            --pico-background-color: #ffc107; /* Amarelo */
+            --pico-background-color: #ffc107;
             --pico-border-color: #ffc107;
             --pico-color: #000;
         }
         .btn-delete {
-            --pico-background-color: #dc3545; /* Vermelho */
+            --pico-background-color: #dc3545;
             --pico-border-color: #dc3545;
         }
-
-        /* Caixa de Mensagem (para substituir alerts) */
         #message-box {
             position: fixed;
-            bottom: -100px; /* Começa fora da tela */
+            bottom: -100px;
             left: 50%;
             transform: translateX(-50%);
             padding: 1rem 1.5rem;
@@ -81,15 +61,12 @@
             z-index: 1000;
             opacity: 0;
         }
-        #message-box.show {
-            bottom: 20px;
-            opacity: 1;
-        }
+        #message-box.show { bottom: 20px; opacity: 1; }
     </style>
 </head>
 <body data-theme="light">
 
-    <!-- Conteúdo Principal -->
+    <!-- Conteúdo Principal (sem mudanças) -->
     <main class="container">
         
         <!-- Cabeçalho -->
@@ -100,27 +77,20 @@
             <p>Adicione, edite e veja os aniversários. Funciona offline!</p>
         </header>
 
-        <!-- Formulário de Cadastro e Edição -->
+        <!-- Formulário (sem mudanças) -->
         <article data-theme="light">
             <form id="birthday-form">
-                <!-- ID oculto para edição -->
                 <input type="hidden" id="entry-id">
-                
                 <div class="grid">
-                    <!-- Campo Nome -->
                     <label for="nome">
                         Nome
                         <input type="text" id="nome" name="nome" placeholder="Nome do aniversariante" required>
                     </label>
-                    
-                    <!-- Campo Data -->
                     <label for="data">
                         Data
                         <input type="date" id="data" name="data" required>
                     </label>
                 </div>
-                
-                <!-- Botões -->
                 <div class="grid">
                     <button type="submit" id="btn-save">Salvar</button>
                     <button type="button" id="btn-clear" class="secondary outline">Limpar</button>
@@ -128,11 +98,10 @@
             </form>
         </article>
 
-        <!-- Seção da Lista -->
+        <!-- Lista (sem mudanças) -->
         <section>
             <h2>Aniversariantes</h2>
             <div id="birthday-list">
-                <!-- Itens serão renderizados aqui pelo JS -->
                 <article id="loading-state">
                     <p aria-busy="true">Carregando aniversariantes...</p>
                 </article>
@@ -141,154 +110,20 @@
 
     </main>
     
-    <!-- Caixa de Mensagem (para substituir o alert) -->
+    <!-- Caixa de Mensagem (sem mudanças) -->
     <div id="message-box"></div>
 
     <!-- 
       ******************************************************************
-      * CONTEÚDO DO MANIFEST (INLINE)
-      * O script principal abaixo vai ler isso e registrar como um Blob.
-      ******************************************************************
-    -->
-    <script id="manifest-json" type="application/json">
-    {
-        "name": "Lista de Aniversários PWA",
-        "short_name": "Aniversários",
-        "description": "Um PWA simples para listar aniversários, com suporte offline.",
-        "start_url": "/DM122-PWA-Birthday/",
-        "display": "standalone",
-        "background_color": "#ffffff",
-        "theme_color": "#546e7a",
-        "orientation": "portrait-primary",
-        "icons": [
-            {
-                "src": "https://placehold.co/192x192/546e7a/ffffff?text=B-Day",
-                "sizes": "192x192",
-                "type": "image/png",
-                "purpose": "any"
-            },
-            {
-                "src": "https://placehold.co/512x512/546e7a/ffffff?text=B-Day",
-                "sizes": "512x512",
-                "type": "image/png",
-                "purpose": "maskable"
-            }
-        ]
-    }
-    </script>
-
-    <!-- 
-      ******************************************************************
-      * CONTEÚDO DO SERVICE WORKER (INLINE)
-      * O script principal abaixo vai ler isso e registrar como um Blob.
-      ******************************************************************
-    -->
-    <script id="sw-script" type="text/serviceworker">
-        /*
-         * Service Worker para Caching Offline
-         */
-
-        const CACHE_NAME = 'birthday-cache-v1';
-        
-        // Arquivos para fazer cache.
-        // Incluímos a própria página ('.') e o CSS do Pico.
-        const PRECACHE_ASSETS = [
-            '/DM122-PWA-Birthday/', // A própria index.html
-            'https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css'
-        ];
-
-        // Evento 'install': Salva os arquivos estáticos no Cache Storage.
-        self.addEventListener('install', (event) => {
-            console.log('[SW] Evento de Instalação');
-            event.waitUntil(
-                caches.open(CACHE_NAME)
-                    .then((cache) => {
-                        console.log('[SW] Fazendo pré-cache dos arquivos estáticos.');
-                        return cache.addAll(PRECACHE_ASSETS);
-                    })
-                    .then(() => {
-                        // Força o novo Service Worker a ativar imediatamente.
-                        return self.skipWaiting();
-                    })
-            );
-        });
-
-        // Evento 'activate': Limpa caches antigos, se houver.
-        self.addEventListener('activate', (event) => {
-            console.log('[SW] Evento de Ativação');
-            // Remove caches antigos que não sejam o CACHE_NAME atual.
-            event.waitUntil(
-                caches.keys().then((cacheNames) => {
-                    return Promise.all(
-                        cacheNames.map((cacheName) => {
-                            if (cacheName !== CACHE_NAME) {
-                                console.log('[SW] Limpando cache antigo:', cacheName);
-                                return caches.delete(cacheName);
-                            }
-                        })
-                    );
-                }).then(() => {
-                    // Assume o controle da página imediatamente.
-                    return self.clients.claim();
-                })
-            );
-        });
-
-        // Evento 'fetch': Intercepta requisições de rede.
-        // Estratégia: Cache-First (Tenta o cache, se falhar, vai para a rede).
-        self.addEventListener('fetch', (event) => {
-            // Só aplica a estratégia para requisições GET
-            if (event.request.method !== 'GET') {
-                return;
-            }
-
-            event.respondWith(
-                caches.match(event.request)
-                    .then((cachedResponse) => {
-                        // 1. Se encontrar no cache, retorna a resposta do cache.
-                        if (cachedResponse) {
-                            // console.log('[SW] Servindo do Cache:', event.request.url);
-                            return cachedResponse;
-                        }
-
-                        // 2. Se não, busca na rede.
-                        return fetch(event.request)
-                            .then((networkResponse) => {
-                                // 2a. Se a busca falhar (offline), não faz nada.
-                                if (!networkResponse || networkResponse.status !== 200) {
-                                    return networkResponse;
-                                }
-
-                                // 2b. Se a busca funcionar, clona a resposta.
-                                // (Uma resposta só pode ser consumida uma vez).
-                                const responseToCache = networkResponse.clone();
-
-                                // 2c. Abre o cache e armazena a nova resposta.
-                                caches.open(CACHE_NAME)
-                                    .then((cache) => {
-                                        // console.log('[SW] Salvando no Cache:', event.request.url);
-                                        cache.put(event.request, responseToCache);
-                                    });
-
-                                // 2d. Retorna a resposta da rede para o navegador.
-                                return networkResponse;
-                            })
-                            .catch((error) => {
-                                console.error('[SW] Erro no Fetch:', error);
-                                // Poderia retornar uma página offline padrão aqui, se tivéssemos uma.
-                            });
-                    })
-            );
-        });
-    </script>
-
-
-    <!-- 
-      ******************************************************************
       * JAVASCRIPT PRINCIPAL DA APLICAÇÃO (APP + INDEXEDDB)
+      * O código do SW e do Manifesto foram REMOVIDOS daqui.
       ******************************************************************
     -->
     <script type="module">
+        
+        // As classes BirthdayDB e AppUI (todo o código do CRUD e da UI)
+        // permanecem exatamente iguais.
+        
         /**
          * Classe BirthdayDB
          * Encapsula toda a lógica de interação com o IndexedDB.
@@ -300,30 +135,20 @@
                 this.db = null;
             }
 
-            /**
-             * Abre (ou cria) o banco de dados IndexedDB.
-             * Retorna uma Promise que resolve quando o DB está pronto.
-             */
             open() {
                 return new Promise((resolve, reject) => {
                     const request = indexedDB.open(this.dbName, 1);
-
-                    // Chamado se o DB precisar ser criado ou atualizado (mudança de versão)
                     request.onupgradeneeded = (event) => {
                         const db = event.target.result;
-                        // Cria o "object store" (como uma tabela) se não existir
                         if (!db.objectStoreNames.contains(this.storeName)) {
-                            // Usamos 'id' como keyPath e autoIncrement para IDs automáticos.
                             db.createObjectStore(this.storeName, { keyPath: 'id', autoIncrement: true });
                         }
                     };
-
                     request.onsuccess = (event) => {
                         this.db = event.target.result;
                         console.log('IndexedDB aberto com sucesso.');
                         resolve(this.db);
                     };
-
                     request.onerror = (event) => {
                         console.error('Erro ao abrir IndexedDB:', event.target.error);
                         reject(event.target.error);
@@ -331,10 +156,6 @@
                 });
             }
 
-            /**
-             * Retorna uma transação e o store.
-             * @param {string} mode - 'readonly' ou 'readwrite'
-             */
             _getTransaction(mode) {
                 if (!this.db) {
                     throw new Error("DB não está aberto. Chame open() primeiro.");
@@ -343,24 +164,15 @@
                 return transaction.objectStore(this.storeName);
             }
 
-            /**
-             * Adiciona ou atualiza um item no DB.
-             * Se o item tiver um 'id', ele atualiza (PUT).
-             * Se não, ele adiciona (ADD).
-             */
             save(item) {
                 return new Promise((resolve, reject) => {
-                    // Converte 'id' para número se vier de um formulário
                     if (item.id) {
                         item.id = parseInt(item.id, 10);
                     }
-                    
                     const store = this._getTransaction('readwrite');
-                    // PUT é seguro tanto para adicionar quanto para atualizar
                     const request = store.put(item); 
-
                     request.onsuccess = (event) => {
-                        resolve(event.target.result); // Retorna o ID
+                        resolve(event.target.result);
                     };
                     request.onerror = (event) => {
                         console.error('Erro ao salvar item:', event.target.error);
@@ -369,14 +181,10 @@
                 });
             }
 
-            /**
-             * Recupera todos os itens do store.
-             */
             getAll() {
                 return new Promise((resolve, reject) => {
                     const store = this._getTransaction('readonly');
                     const request = store.getAll();
-
                     request.onsuccess = (event) => {
                         resolve(event.target.result);
                     };
@@ -387,15 +195,10 @@
                 });
             }
 
-            /**
-             * Deleta um item pelo ID.
-             */
             delete(id) {
                 return new Promise((resolve, reject) => {
                     const store = this._getTransaction('readwrite');
-                    // ID precisa ser um número
                     const request = store.delete(parseInt(id, 10));
-
                     request.onsuccess = () => {
                         resolve();
                     };
@@ -414,31 +217,20 @@
         class AppUI {
             constructor(db) {
                 this.db = db;
-                
-                // Elementos do DOM
                 this.form = document.getElementById('birthday-form');
                 this.listContainer = document.getElementById('birthday-list');
                 this.loadingState = document.getElementById('loading-state');
                 this.messageBox = document.getElementById('message-box');
-                
-                // Campos do formulário
                 this.fieldId = document.getElementById('entry-id');
                 this.fieldName = document.getElementById('nome');
                 this.fieldDate = document.getElementById('data');
-                
-                // Botões
                 this.btnClear = document.getElementById('btn-clear');
-                
-                // Timer da caixa de mensagem
                 this.messageTimer = null;
             }
 
-            /**
-             * Inicializa a UI: conecta ao DB, registra eventos e carrega a lista.
-             */
             async init() {
                 try {
-                    await this.db.open(); // Espera o DB conectar
+                    await this.db.open();
                     this.registerEventListeners();
                     this.loadBirthdayList();
                 } catch (error) {
@@ -447,14 +239,10 @@
                 }
             }
 
-            /**
-             * Registra todos os listeners de eventos.
-             */
             registerEventListeners() {
                 this.form.addEventListener('submit', (e) => this.handleFormSubmit(e));
                 this.btnClear.addEventListener('click', () => this.clearForm());
                 
-                // Listeners para 'Editar' e 'Deletar' são delegados ao container da lista
                 this.listContainer.addEventListener('click', (e) => {
                     const target = e.target;
                     if (target.classList.contains('btn-edit')) {
@@ -468,9 +256,6 @@
                 });
             }
 
-            /**
-             * Carrega e renderiza a lista de aniversariantes.
-             */
             async loadBirthdayList() {
                 try {
                     const items = await this.db.getAll();
@@ -481,30 +266,21 @@
                 }
             }
 
-            /**
-             * Formata uma data YYYY-MM-DD para DD/MM/YYYY
-             */
             formatDate(isoDate) {
                 if (!isoDate) return 'Data inválida';
                 const [year, month, day] = isoDate.split('-');
                 return `${day}/${month}/${year}`;
             }
 
-            /**
-             * Renderiza a lista de itens no DOM.
-             */
             renderList(items) {
-                this.loadingState.style.display = 'none'; // Esconde o "loading"
+                this.loadingState.style.display = 'none';
                 
                 if (items.length === 0) {
                     this.listContainer.innerHTML = '<p>Nenhum aniversário cadastrado ainda.</p>';
                     return;
                 }
 
-                // Ordena por data (extra: podemos melhorar isso)
                 items.sort((a, b) => a.data.localeCompare(b.data));
-
-                // Limpa a lista antes de renderizar
                 this.listContainer.innerHTML = ''; 
 
                 items.forEach(item => {
@@ -525,20 +301,15 @@
                 });
             }
 
-            /**
-             * Lida com o envio do formulário (Salvar/Atualizar).
-             */
             async handleFormSubmit(event) {
                 event.preventDefault();
-                
                 const entry = {
                     nome: this.fieldName.value,
                     data: this.fieldDate.value
                 };
-
                 const id = this.fieldId.value;
                 if (id) {
-                    entry.id = id; // Adiciona o ID para atualização
+                    entry.id = id;
                 }
                 
                 try {
@@ -552,66 +323,44 @@
                 }
             }
 
-            /**
-             * Prepara o formulário para edição.
-             */
             async handleEditClick(id) {
                 try {
-                    // O getAll já está no App, mas para garantir, buscamos o item exato
-                    // Numa app maior, teríamos db.get(id)
                     const items = await this.db.getAll(); 
                     const item = items.find(i => i.id === parseInt(id, 10));
-
                     if (item) {
                         this.fieldId.value = item.id;
                         this.fieldName.value = item.nome;
                         this.fieldDate.value = item.data;
-                        this.fieldName.focus(); // Foca no campo nome
+                        this.fieldName.focus();
                     }
                 } catch (error) {
                     console.error("Erro ao carregar para edição:", error);
                 }
             }
 
-            /**
-             * Deleta um item (aqui poderíamos adicionar uma confirmação).
-             */
             async handleDeleteClick(id) {
-                // Como não podemos usar confirm(), deletamos direto.
-                // Em uma app real, criaríamos um modal de confirmação.
                 try {
                     await this.db.delete(id);
                     this.showMessage('Aniversário excluído.');
                     this.loadBirthdayList();
-                    this.clearForm(); // Limpa o form caso estivesse editando o item excluído
+                    this.clearForm();
                 } catch (error) {
                     console.error("Erro ao deletar:", error);
                     this.showMessage('Erro ao excluir.', 'error');
                 }
             }
 
-            /**
-             * Limpa os campos do formulário.
-             */
             clearForm() {
                 this.form.reset();
                 this.fieldId.value = '';
             }
             
-            /**
-             * Mostra uma mensagem flutuante (substituindo alert).
-             * @param {string} message - A mensagem a ser exibida.
-             */
             showMessage(message) {
-                // Limpa timer anterior se houver
                 if (this.messageTimer) {
                     clearTimeout(this.messageTimer);
                 }
-
                 this.messageBox.textContent = message;
                 this.messageBox.classList.add('show');
-
-                // Esconde a mensagem após 3 segundos
                 this.messageTimer = setTimeout(() => {
                     this.messageBox.classList.remove('show');
                 }, 3000);
@@ -620,46 +369,21 @@
 
 
         /**
-         * Função de Registro do PWA (Service Worker e Manifesto)
-         * Esta função lê o conteúdo dos <script> especiais no HTML
-         * e os registra usando URLs de Blob.
+         * Função de Registro do PWA (Service Worker)
+         * Agora muito mais simples: apenas registra o arquivo sw.js.
          */
         function registerPWA() {
-            // 1. Registro do Manifesto
-            try {
-                const manifestContent = document.getElementById('manifest-json').textContent;
-                const manifestBlob = new Blob([manifestContent], { type: 'application/json' });
-                const manifestUrl = URL.createObjectURL(manifestBlob);
-                
-                // Cria e adiciona a tag <link rel="manifest"> no <head>
-                const link = document.createElement('link');
-                link.rel = 'manifest';
-                link.href = manifestUrl;
-                document.head.appendChild(link);
-                console.log('Manifesto registrado via Blob URL:', manifestUrl);
-            } catch (e) {
-                console.error('Erro ao registrar o Manifesto:', e);
-            }
-
-            // 2. Registro do Service Worker
             if ('serviceWorker' in navigator) {
-                try {
-                    const swContent = document.getElementById('sw-script').textContent;
-                    const swBlob = new Blob([swContent], { type: 'application/javascript' });
-                    const swUrl = URL.createObjectURL(swBlob);
-                    
-                    window.addEventListener('load', () => {
-                        navigator.serviceWorker.register(swUrl, { scope: '/DM122-PWA-Birthday/' })
-                            .then(registration => {
-                                console.log('Service Worker registrado com sucesso! Escopo:', registration.scope);
-                            })
-                            .catch(error => {
-                                console.error('Falha ao registrar Service Worker:', error);
-                            });
-                    });
-                } catch (e) {
-                    console.error('Erro ao criar Blob do Service Worker:', e);
-                }
+                window.addEventListener('load', () => {
+                    // Registra o Service Worker a partir do arquivo
+                    navigator.serviceWorker.register('./sw.js')
+                        .then(registration => {
+                            console.log('Service Worker registrado com sucesso! Escopo:', registration.scope);
+                        })
+                        .catch(error => {
+                            console.error('Falha ao registrar Service Worker:', error);
+                        });
+                });
             } else {
                 console.warn('Service Worker não é suportado neste navegador.');
             }
@@ -667,7 +391,7 @@
         
         // --- INICIALIZAÇÃO DA APLICAÇÃO ---
         
-        // Registra os componentes do PWA
+        // Registra o Service Worker
         registerPWA();
 
         // Aguarda o DOM estar pronto para iniciar a UI
